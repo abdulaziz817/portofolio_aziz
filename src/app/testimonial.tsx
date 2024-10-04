@@ -12,14 +12,13 @@ export function Testimonial() {
       <div className="container max-w-screen-lg mx-auto">
         <div className="container mx-auto mb-20 text-center">
           <Typography variant="h2" color="blue-gray" className="mb-4">
-            What Clients Say
+            Apa Kata Klien
           </Typography>
           <Typography
             variant="lead"
             className="mx-auto w-full px-4 font-normal !text-gray-500 lg:w-8/12"
           >
-            Discover what clients have to say about their experiences working
-            with me. My client&apos;s satisfaction is my greatest achievement!
+            Temukan pendapat klien tentang pengalaman mereka bekerja dengan saya. Kepuasan klien adalah pencapaian terbesar saya!
           </Typography>
         </div>
         <Card color="transparent" shadow={false} className="py-8 lg:flex-row">
@@ -30,27 +29,25 @@ export function Testimonial() {
                 color="blue-gray"
                 className="mb-4 font-bold lg:max-w-xs"
               >
-                Mobile App Development
+                Pengembangan Aplikasi Mobile
               </Typography>
               <Typography className="mb-3 w-full lg:w-8/12 font-normal !text-gray-500">
-                I had the pleasure of working with Lily on a critical web
-                development project, and I can confidently say that their
-                expertise and professionalism exceeded my expectations.
+                Saya sangat senang bekerja dengan Lily pada proyek pengembangan web yang sangat penting, dan saya bisa mengatakan dengan yakin bahwa keahlian dan profesionalisme mereka melebihi harapan saya.
               </Typography>
               <Typography variant="h6" color="blue-gray" className="mb-0.5">
-                Michael - Technical Manager
+                Michael - Manajer Teknis
               </Typography>
               <Typography
                 variant="small"
                 className="font-normal mb-5 !text-gray-500"
               >
-                Marketing @ APPLE INC.
+                Pemasaran @ APPLE INC.
               </Typography>
               <div className="flex items-center gap-4">
                 <Avatar
                   variant="rounded"
                   src="/image/avatar1.jpg"
-                  alt="spotify"
+                  alt="avatar"
                   size="sm"
                   className={`cursor-pointer ${
                     active === 1 ? "opacity-100" : "opacity-50"
@@ -61,7 +58,7 @@ export function Testimonial() {
                 <Avatar
                   variant="rounded"
                   src="/image/avatar2.jpg"
-                  alt="spotify"
+                  alt="avatar"
                   size="sm"
                   className={`cursor-pointer ${
                     active === 2 ? "opacity-100" : "opacity-50"
@@ -72,7 +69,7 @@ export function Testimonial() {
                 <Avatar
                   variant="rounded"
                   src="/image/avatar3.jpg"
-                  alt="spotify"
+                  alt="avatar"
                   size="sm"
                   className={`cursor-pointer ${
                     active === 3 ? "opacity-100" : "opacity-50"
@@ -85,7 +82,7 @@ export function Testimonial() {
               <Image
                 width={768}
                 height={768}
-                alt="testimonial image"
+                alt="gambar testimonial"
                 src={`/image/avatar${active}.jpg`}
                 className="h-full rounded-lg w-full object-cover"
               />

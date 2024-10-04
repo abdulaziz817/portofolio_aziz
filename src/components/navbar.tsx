@@ -68,8 +68,13 @@ export function Navbar() {
   return (
     <MTNavbar shadow={false} fullWidth className="border-0 sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between">
-        <Typography color="blue-gray" className="text-lg font-bold">
-          Material Tailwind
+        {/* Mengganti logo gambar dengan teks */}
+        <Typography
+          as="span"
+          variant="h6"
+          className="font-bold text-gray-900"
+        >
+          Abdul Aziz
         </Typography>
         <ul className="ml-10 hidden items-center gap-8 lg:flex">
           {NAV_MENU.map(({ name, icon: Icon, href }) => (
@@ -81,8 +86,9 @@ export function Navbar() {
         </ul>
         <div className="hidden items-center gap-2 lg:flex">
           <Button variant="text">Sign In</Button>
-          <a href="https://www.material-tailwind.com/blocks" target="_blank">
-            <Button color="gray">blocks</Button>
+          <a href="/image/CV_Abdul_Aziz.pdf" download="CV_AbdulAziz.pdf">
+            {/* Tombol Unduh CV */}
+            <Button color="gray">Unduh CV</Button>
           </a>
         </div>
         <IconButton
@@ -110,8 +116,8 @@ export function Navbar() {
           </ul>
           <div className="mt-6 mb-4 flex items-center gap-2">
             <Button variant="text">Sign In</Button>
-            <a href="https://www.material-tailwind.com/blocks" target="_blank">
-              <Button color="gray">blocks</Button>
+            <a href="/path-to-your-cv.pdf" download="CV_AbdulAziz.pdf">
+              <Button color="gray">Unduh CV</Button>
             </a>
           </div>
         </div>

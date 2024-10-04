@@ -2,26 +2,26 @@
 
 import { Typography, Button } from "@material-tailwind/react";
 import {
-  ChartBarIcon,
-  PuzzlePieceIcon,
-  CursorArrowRaysIcon,
-  ArrowRightIcon,
+  AcademicCapIcon, // Ikon Pendidikan (gelar)
+  ClipboardDocumentCheckIcon, // Ikon Sertifikat (sertifikasi)
+  ArrowRightIcon, // Ikon panah kanan untuk tombol
 } from "@heroicons/react/24/solid";
 import { ResumeItem } from "@/components";
 
 const RESUME_ITEMS = [
   {
-    icon: ChartBarIcon,
-    children: "Bachelor of Science in Computer Science",
+    icon: AcademicCapIcon,
+    children: "Pendidikan: SMK Madinatul Qur'an, Jonggol",
   },
   {
-    icon: PuzzlePieceIcon,
-    children: "Certified Web Developer ",
-  },
-  {
-    icon: CursorArrowRaysIcon,
-    children: "Frontend Framework Proficiency Certification",
-  },
+    icon: ClipboardDocumentCheckIcon,
+    children: "Sertifikat Kursus Desain Grafis",
+},
+{
+    icon: ClipboardDocumentCheckIcon,
+    children: "Sertifikat Penghargaan Lomba Desain Grafis",
+},
+
 ];
 
 export function Resume() {
@@ -30,19 +30,17 @@ export function Resume() {
       <div className="container mx-auto grid w-full grid-cols-1 items-center gap-16 lg:grid-cols-2">
         <div className="col-span-1">
           <Typography variant="h2" color="blue-gray">
-            My Resume
+            Riwayat Hidup
           </Typography>
           <Typography className="mb-4 mt-3 w-9/12 font-normal !text-gray-500">
-            Highly skilled and creative Web Developer with 5+ years of
-            experience in crafting visually stunning and functionally robust
-            websites and web applications.
+            Desainer grafis berpengalaman dengan lebih dari 5 tahun dalam menciptakan desain visual yang menarik dan fungsional, baik untuk media cetak maupun digital.
           </Typography>
           <Button
             variant="text"
             color="gray"
             className="flex items-center gap-2"
           >
-            view more
+            Lihat lebih lanjut
             <ArrowRightIcon
               strokeWidth={3}
               className="h-3.5 w-3.5 text-gray-900"

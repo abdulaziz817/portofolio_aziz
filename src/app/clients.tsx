@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Typography } from "@material-tailwind/react";
 
-const CLIENTS = [
+const KLIEN = [
   "coinbase",
   "spotify",
   "pinterest",
@@ -12,15 +12,15 @@ const CLIENTS = [
   "netflix",
 ];
 
-export function Clients() {
+export function Klien() {
   return (
     <section className="px-8 py-28">
       <div className="container mx-auto text-center">
         <Typography variant="h6" color="blue-gray" className="mb-8">
-          My awesome clients
+          Klien-klien hebat saya
         </Typography>
         <div className="flex flex-wrap items-center justify-center gap-6">
-          {CLIENTS.map((logo, key) => (
+          {KLIEN.map((logo, key) => (
             <Image
               key={key}
               alt={logo}
@@ -36,4 +36,4 @@ export function Clients() {
   );
 }
 
-export default Clients;
+export default Klien;

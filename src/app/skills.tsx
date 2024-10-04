@@ -2,51 +2,65 @@
 
 import { Typography } from "@material-tailwind/react";
 import {
-  RectangleGroupIcon,
-  FingerPrintIcon,
-  SwatchIcon,
-  HashtagIcon,
-  EyeIcon,
-  DocumentTextIcon,
+  PencilSquareIcon, // Desain Grafis (ikon pensil sebagai simbol desain)
+  CameraIcon, // Fotografi (ikon kamera)
+  DevicePhoneMobileIcon, // UI/UX (ikon perangkat mobile sebagai simbol UI/UX)
+  SparklesIcon, // Canva (ikon kilau atau kreativitas)
+  PaintBrushIcon, // CorelDRAW (ikon kuas sebagai simbol ilustrasi)
+  PhotoIcon, // Adobe (ikon gambar sebagai simbol software desain Adobe)
+  ComputerDesktopIcon, // Figma (ikon komputer atau perangkat digital)
+  DocumentTextIcon, // Microsoft Office (ikon dokumen sebagai simbol administrasi)
 } from "@heroicons/react/24/solid";
 import { SkillCard } from "@/components";
 
-const SKILLS = [
+const KEAHLIAN = [
   {
-    icon: RectangleGroupIcon,
-    title: "Frontend Web Development:",
+    icon: PencilSquareIcon,
+    title: "Desain Grafis",
     children:
-      "Creating beautiful and functional web experiences is my forte. Using the latest technologies and best practices, I design and build websites that captivate and engage users.",
+      "Menciptakan desain visual yang menarik dan fungsional untuk berbagai platform, baik media cetak maupun digital.",
   },
   {
-    icon: FingerPrintIcon,
-    title: "Mobile App Development",
+    icon: CameraIcon,
+    title: "Fotografi",
     children:
-      " I specialize in creating responsive and intuitive mobile apps that work seamlessly across iOS & Android devices. From concept to deployment, I handle every stage of the development process.",
+      "Menghasilkan foto-foto berkualitas tinggi yang menangkap momen-momen penting dengan estetika visual yang menarik.",
   },
   {
-    icon: SwatchIcon,
-    title: "Technology Stack",
+    icon: DevicePhoneMobileIcon,
+    title: "UI/UX",
     children:
-      "I'm well-versed in the industry's most popular frontend technologies, including HTML5, CSS3, JavaScript, and frameworks like React and React Native.",
+      "Merancang pengalaman pengguna yang intuitif dan interaktif dengan pendekatan user-centric untuk aplikasi dan website.",
   },
   {
-    icon: HashtagIcon,
-    title: " Web Optimization",
+    icon: SparklesIcon,
+    title: "Canva",
     children:
-      "Performance matters. I optimize websites and apps for speed, ensuring your users enjoy a fast and responsive experience, which in turn boosts user satisfaction and SEO rankings.",
+      "Menggunakan Canva untuk membuat desain yang cepat dan profesional untuk berbagai keperluan, seperti poster, media sosial, dan presentasi.",
   },
   {
-    icon: EyeIcon,
-    title: "User-Centric Design",
+    icon: PaintBrushIcon,
+    title: "CorelDRAW",
     children:
-      "My development goes hand-in-hand with an eye for design. I create user interfaces that are not only functional but also aesthetically pleasing, providing a seamless and enjoyable user journey.",
+      "Menguasai CorelDRAW untuk menciptakan ilustrasi, logo, dan desain vektor dengan presisi tinggi.",
+  },
+  {
+    icon: PhotoIcon,
+    title: "Adobe",
+    children:
+      "Berpengalaman menggunakan berbagai software Adobe untuk desain grafis, termasuk Photoshop, Illustrator, dan lainnya.",
+  },
+  {
+    icon: ComputerDesktopIcon,
+    title: "Figma",
+    children:
+      "Menggunakan Figma untuk kolaborasi desain UI/UX yang efisien, baik untuk prototyping maupun handoff kepada developer.",
   },
   {
     icon: DocumentTextIcon,
-    title: "Testing and Quality Assurance",
+    title: "Microsoft Office",
     children:
-      "I rigorously test and debug applications to guarantee a bug-free and secure environment for users. Your peace of mind is as important to me as the functionality of your project.",
+      "Menguasai Microsoft Office untuk keperluan administrasi, penyusunan dokumen, presentasi, dan analisis data.",
   },
 ];
 
@@ -55,22 +69,23 @@ export function Skills() {
     <section className="px-8">
       <div className="container mx-auto mb-20 text-center">
         <Typography color="blue-gray" className="mb-2 font-bold uppercase">
-          my skills
+          Keahlian Saya
         </Typography>
         <Typography variant="h1" color="blue-gray" className="mb-4">
-          What I do
+          Apa yang Saya Lakukan
         </Typography>
         <Typography
           variant="lead"
           className="mx-auto w-full !text-gray-500 lg:w-10/12"
         >
-          I&apos;m not just a developer; I&apos;m a digital dreamweaver.
-          Crafting immersive online experiences is not just a job but my
-          calling. Discover below how I can help you.
+          Saya tidak hanya seorang desainer; saya adalah seorang kreator
+          pengalaman digital. Merancang desain yang immersive bukan hanya
+          pekerjaan, tetapi panggilan hidup saya. Temukan di bawah bagaimana
+          saya dapat membantu Anda.
         </Typography>
       </div>
       <div className="container mx-auto grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-        {SKILLS.map((props, idx) => (
+        {KEAHLIAN.map((props, idx) => (
           <SkillCard key={idx} {...props} />
         ))}
       </div>
