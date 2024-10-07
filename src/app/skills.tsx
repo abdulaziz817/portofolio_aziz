@@ -62,6 +62,8 @@ const KEAHLIAN = [
     children:
       "Menguasai Microsoft Office untuk keperluan administrasi, penyusunan dokumen, presentasi, dan analisis data.",
   },
+  
+
 ];
 
 export function Skills() {

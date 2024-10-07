@@ -7,27 +7,28 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import {
-  RectangleStackIcon,
-  UserCircleIcon,
-  CommandLineIcon,
-  Squares2X2Icon,
+  HomeIcon,
+  LightBulbIcon,
+  FolderIcon,
+  DocumentTextIcon,
+  PhoneIcon,
   XMarkIcon,
   Bars3Icon,
 } from "@heroicons/react/24/solid";
 
 const NAV_MENU = [
   {
-    name: "Page",
-    icon: RectangleStackIcon,
+    name: "Rumah",
+    icon: HomeIcon,
   },
   {
-    name: "Account",
-    icon: UserCircleIcon,
+    name: "Keahlian",
+    icon: LightBulbIcon,
   },
+
   {
-    name: "Docs",
-    icon: CommandLineIcon,
-    href: "https://www.material-tailwind.com/docs/react/installation",
+    name: "Kontak",
+    icon: PhoneIcon,
   },
 ];
 
@@ -42,7 +43,6 @@ function NavItem({ children, href }: NavItemProps) {
       <Typography
         as="a"
         href={href || "#"}
-        target={href ? "_blank" : "_self"}
         variant="paragraph"
         color="gray"
         className="flex items-center gap-2 font-medium text-gray-900"
@@ -72,7 +72,7 @@ export function Navbar() {
         <Typography
           as="span"
           variant="h6"
-          className="font-bold text-gray-900"
+          className="font-bold text-gray-900 text-2xl "
         >
           Abdul Aziz
         </Typography>
@@ -85,8 +85,8 @@ export function Navbar() {
           ))}
         </ul>
         <div className="hidden items-center gap-2 lg:flex">
-          <Button variant="text">Sign In</Button>
-          <a href="/image/CV_Abdul_Aziz.pdf" download="CV_AbdulAziz.pdf">
+          <Button variant="text">Daftar</Button>
+          <a href="/image/CV_Abdul_Aziz.pdf" download="CV">
             {/* Tombol Unduh CV */}
             <Button color="gray">Unduh CV</Button>
           </a>
@@ -107,16 +107,16 @@ export function Navbar() {
       <Collapse open={open}>
         <div className="container mx-auto mt-3 border-t border-gray-200 px-2 pt-4">
           <ul className="flex flex-col gap-4">
-            {NAV_MENU.map(({ name, icon: Icon }) => (
-              <NavItem key={name}>
+            {NAV_MENU.map(({ name, icon: Icon, href }) => (
+              <NavItem key={name} href={href}>
                 <Icon className="h-5 w-5" />
                 {name}
               </NavItem>
             ))}
           </ul>
           <div className="mt-6 mb-4 flex items-center gap-2">
-            <Button variant="text">Sign In</Button>
-            <a href="/path-to-your-cv.pdf" download="CV_AbdulAziz.pdf">
+            <Button variant="text">Daftar</Button>
+            <a href="/image/CV_Abdul_Aziz.pdf" download="CV">
               <Button color="gray">Unduh CV</Button>
             </a>
           </div>

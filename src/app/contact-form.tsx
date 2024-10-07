@@ -11,8 +11,214 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { EnvelopeIcon, PhoneIcon, TicketIcon } from "@heroicons/react/24/solid";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import { useState } from "react";
+
+// Store to track email submission counts
+const emailSubmissionCount = {};
 
 export function ContactForm() {
+  const [downloadStatus, setDownloadStatus] = useState(null); // State for download status
+  const [selectedInterests, setSelectedInterests] = useState([]); // Track selected interests
+  const [submissionError, setSubmissionError] = useState(null); // State for error messages
+
+  const handleInterestChange = (e: any) => {
+    const value = e.target.value;
+    if (selectedInterests.includes(value)) {
+      // Jika minat sudah dipilih, hapus dari array
+      setSelectedInterests((prev) =>
+        prev.filter((interest) => interest !== value)
+      );
+    } else if (selectedInterests.length < 2) {
+      // Tambah minat jika kurang dari 2 yang dipilih
+      setSelectedInterests((prev) => [...prev, value]);
+    }
+  };
+
+  const handleSubmit = (e:any) => {
+    e.preventDefault();
+    setSubmissionError(null); // Clear previous error messages
+
+    const formData = new FormData(e.target);
+    const firstName = formData.get("first-name");
+    const lastName = formData.get("last-name");
+    const email = formData.get("email");
+    const phone = formData.get("phone");
+    const address = formData.get("address");
+    const message = formData.get("message");
+
+    // Validate all fields are filled
+    if (!firstName || !lastName || !email || !phone || !address || !message) {
+      setSubmissionError("Semua kolom harus diisi.");
+      return;
+    }
+
+    // Validate email ends with @gmail.com
+    if (!email.endsWith("@gmail.com")) {
+      setSubmissionError("Email harus menggunakan domain @gmail.com.");
+      return;
+    }
+
+    // Validate phone starts with +62
+    if (!phone.startsWith("+62")) {
+      setSubmissionError("Telepon harus berawalan +62.");
+      return;
+    }
+
+    // Validate phone is a valid number
+    if (!/^\+62\d{9,12}$/.test(phone)) {
+      setSubmissionError(
+        "Nomor telepon harus berupa angka yang valid antara 10-13 digit.(tanpa spasi)"
+      );
+      return;
+    }
+
+    // Limit form submissions to 2 times for the same email
+    if (!emailSubmissionCount[email]) {
+      emailSubmissionCount[email] = 0;
+    }
+
+    if (emailSubmissionCount[email] >= 2) {
+      setSubmissionError(
+        "Anda hanya bisa mengirimkan formulir dua kali dengan email yang sama."
+      );
+      return;
+    }
+
+    emailSubmissionCount[email] += 1;
+
+    // Ensure no more than 2 interests are selected
+    if (selectedInterests.length > 2) {
+      setSubmissionError("Anda hanya dapat memilih maksimal 2 minat.");
+      return;
+    }
+
+    // Create a PDF document
+    const doc = new jsPDF("portrait", "pt", "a4");
+
+    // Set a background color
+    doc.setFillColor(230, 230, 250); // Light lavender
+    doc.rect(
+      0,
+      0,
+      doc.internal.pageSize.width,
+      doc.internal.pageSize.height,
+      "F"
+    );
+
+    // Add header
+    doc.setFontSize(26);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(50, 50, 255); // Deep blue
+    doc.text("Pengiriman Formulir", doc.internal.pageSize.getWidth() / 2, 50, {
+      align: "center",
+    });
+
+    // Add some branding
+    doc.setFontSize(16);
+    doc.setTextColor(120);
+    doc.setFont("courier", "normal");
+    doc.text(
+      "Di Desain oleh Abdul Aziz",
+      doc.internal.pageSize.getWidth() / 2,
+      70,
+      {
+        align: "center",
+      }
+    );
+
+    // Add a logo or placeholder image (optional)
+    doc.addImage("https://via.placeholder.com/150", "JPEG", 40, 40, 100, 100);
+
+    // Create a custom header background with some shapes
+    doc.setFillColor(100, 100, 250); // Light blue
+    doc.roundedRect(
+      30,
+      120,
+      doc.internal.pageSize.getWidth() - 60,
+      40,
+      10,
+      10,
+      "F"
+    );
+
+    // Contact information section
+    doc.setFontSize(18);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(255, 255, 255); // White text
+    doc.text("Informasi Pengguna", 40, 145);
+
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(50, 50, 50);
+    doc.text(`Nama Depan: ${firstName}`, 40, 200);
+    doc.text(`Nama Belakang: ${lastName}`, 40, 230);
+    doc.text(`Email: ${email}`, 40, 260);
+    doc.text(`Telepon: ${phone}`, 40, 290); // Add phone number
+    doc.text(`Alamat: ${address}`, 40, 320); // Add address
+    doc.text(`Pesan: ${message}`, 40, 350);
+
+    // Section for interests
+    doc.setFontSize(18);
+    doc.setFont("helvetica", "bold");
+    doc.setFillColor(230, 230, 250); // Light lavender background
+    doc.rect(30, 380, doc.internal.pageSize.getWidth() - 60, 30, "F");
+    doc.setTextColor(50, 50, 255); // Deep blue text
+    doc.text("Minat Pengguna", 40, 400);
+
+    // List of interests
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Yang di Minati: ${selectedInterests.join(", ")}`, 40, 430);
+
+    // Divider line to separate sections
+    doc.setDrawColor(150);
+    doc.setLineWidth(1);
+    doc.line(40, 460, doc.internal.pageSize.getWidth() - 40, 460);
+
+    // Footer section
+    doc.setFontSize(12);
+    doc.setTextColor(100, 100, 100);
+    doc.setFont("courier", "italic");
+    doc.text(
+      "Terima kasih atas kiriman Anda! Kami akan segera menghubungi Anda.",
+      40,
+      490
+    );
+
+    // Save the PDF
+    const pdfOutput = doc.output("blob");
+
+    // Create a link to download the PDF
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(pdfOutput);
+    link.download = "Pengiriman Registrasi";
+
+    document.body.appendChild(link);
+
+    setTimeout(() => {
+      link.click();
+      document.body.removeChild(link);
+
+      // Set download status to success after the delay
+      setDownloadStatus("success");
+
+      setTimeout(() => {
+        setDownloadStatus(null);
+      }, 2000);
+    }, 2000);
+
+    // Handle WhatsApp API link (optional)
+    const phoneNumber = "087782535212";
+    const messageToSend = encodeURIComponent(
+      "Saya ingin mengirimkan PDF kontak."
+    );
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${messageToSend}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
   return (
     <section className="px-8 py-16">
       <div className="container mx-auto mb-20 text-center">
@@ -23,7 +229,9 @@ export function ContactForm() {
           variant="lead"
           className="mx-auto w-full lg:w-5/12 !text-gray-500"
         >
-          Siap untuk memulai? Jangan ragu untuk menghubungi kami melalui formulir kontak ini, dan mari kita mulai perjalanan menuju inovasi dan kesuksesan.
+          Siap untuk memulai? Jangan ragu untuk menghubungi kami melalui
+          formulir kontak ini, dan mari kita mulai perjalanan menuju inovasi dan
+          kesuksesan.
         </Typography>
       </div>
       <div>
@@ -37,7 +245,8 @@ export function ContactForm() {
                 variant="lead"
                 className="mx-auto mb-8 text-base !text-gray-500"
               >
-                Isi formulir ini dan tim kami akan menghubungi Anda dalam waktu 24 jam.
+                Isi formulir ini dan tim kami akan menghubungi Anda dalam waktu
+                24 jam.
               </Typography>
               <div className="flex gap-5">
                 <PhoneIcon className="h-6 w-6 text-white" />
@@ -70,21 +279,19 @@ export function ContactForm() {
               </div>
             </div>
             <div className="w-full mt-8 md:mt-0 md:px-10 col-span-4 h-full p-5">
-              <form action="#">
+              <form onSubmit={handleSubmit}>
                 <div className="mb-8 grid gap-4 lg:grid-cols-2">
-                  {/* @ts-ignore */}
                   <Input
                     color="gray"
                     size="lg"
                     variant="static"
                     label="Nama Depan"
                     name="first-name"
-                    placeholder="contoh: Aziz"
+                    placeholder="contoh: Abdul"
                     containerProps={{
                       className: "!min-w-full mb-3 md:mb-0",
                     }}
                   />
-                  {/* @ts-ignore */}
                   <Input
                     color="gray"
                     size="lg"
@@ -97,45 +304,133 @@ export function ContactForm() {
                     }}
                   />
                 </div>
-                {/* @ts-ignore */}
+                <div className="mb-8 grid gap-4 lg:grid-cols-2">
+                  <Input
+                    color="gray"
+                    size="lg"
+                    variant="static"
+                    label="Email"
+                    name="email"
+                    placeholder="zizzzdul817@gmail.com"
+                    containerProps={{
+                      className: "!min-w-full mb-3 md:mb-0",
+                    }}
+                  />
+                  <Input
+                    color="gray"
+                    size="lg"
+                    variant="static"
+                    label="Telepon"
+                    name="phone"
+                    placeholder="contoh: +62 877 8253 5212"
+                    containerProps={{
+                      className: "!min-w-full",
+                    }}
+                  />
+                </div>
                 <Input
                   color="gray"
                   size="lg"
                   variant="static"
-                  label="Email"
-                  name="email"
-                  placeholder="zizzzdul817@gmail.com"
+                  label="Alamat"
+                  name="address" // New field
+                  placeholder="contoh: Jalan Mawar No. 123"
                   containerProps={{
                     className: "!min-w-full mb-8",
                   }}
                 />
-              <Typography variant="lead" className="!text-blue-gray-500 text-sm mb-2">
-  Apa yang Anda minati?
-</Typography>
-<div className="-ml-3 mb-14">
-  {/* @ts-ignore */}
-  <Radio color="gray" name="type" label="Desain Tipografi" defaultChecked />
-  {/* @ts-ignore */}
-  <Radio color="gray" name="type" label="Desain Iklan" />
-  {/* @ts-ignore */}
-  <Radio color="gray" name="type" label="Desain Ilustrasi" />
-  {/* @ts-ignore */}
-  <Radio color="gray" name="type" label="Desain Web" />
-  {/* @ts-ignore */}
-  <Radio color="gray" name="type" label="Desain Motion Graphics" />
-  {/* @ts-ignore */}
-  <Radio color="gray" name="type" label="Desain Paket" />
-  {/* @ts-ignore */}
-  <Radio color="gray" name="type" label="Desain Multimedia" />
-  {/* @ts-ignore */}
-  <Radio color="gray" name="type" label="Desain Pameran" />
-    {/* @ts-ignore */}
-  <Radio color="gray" name="type" label="Kursus Desain" />
-    {/* @ts-ignore */}
-  <Radio color="gray" name="type" label="Lainnya" />
-</div>
-
-                {/* @ts-ignore */}
+                <Typography
+                  variant="lead"
+                  className="!text-blue-gray-500 text-sm mb-2"
+                >
+                  Apa yang Anda minati?
+                </Typography>
+                <div className="-ml-3 mb-14">
+                  <Radio
+                    color="gray"
+                    name="type"
+                    label="Desain Tipografi"
+                    value="Desain Tipografi"
+                    onChange={handleInterestChange}
+                  />
+                  <Radio
+                    color="gray"
+                    name="type"
+                    label="Desain Iklan"
+                    value="Desain Iklan"
+                    onChange={handleInterestChange}
+                  />
+                  <Radio
+                    color="gray"
+                    name="type"
+                    label="Desain Ilustrasi"
+                    value="Desain Ilustrasi"
+                    onChange={handleInterestChange}
+                  />
+                  <Radio
+                    color="gray"
+                    name="type"
+                    label="Desain Web"
+                    value="Desain Web"
+                    onChange={handleInterestChange}
+                  />
+                  <Radio
+                    color="gray"
+                    name="type"
+                    label="Desain Motion Graphics"
+                    value="Desain Motion Graphics"
+                    onChange={handleInterestChange}
+                  />
+                  <Radio
+                    color="gray"
+                    name="type"
+                    label="Desain Paket"
+                    value="Desain Paket"
+                    onChange={handleInterestChange}
+                  />
+                  <Radio
+                    color="gray"
+                    name="type"
+                    label="Desain Multimedia"
+                    value="Desain Multimedia"
+                    onChange={handleInterestChange}
+                  />
+                  <Radio
+                    color="gray"
+                    name="type"
+                    label="Desain Pameran"
+                    value="Desain Pameran"
+                    onChange={handleInterestChange}
+                  />
+                  <Radio
+                    color="gray"
+                    name="type"
+                    label="Kursus Desain"
+                    value="Kursus Desain"
+                    onChange={handleInterestChange}
+                  />
+                  <Radio
+                    color="gray"
+                    name="type"
+                    label="Editing Vidio"
+                    value="Editing Vidio"
+                    onChange={handleInterestChange}
+                  />
+                  <Radio
+                    color="gray"
+                    name="type"
+                    label="Fotografi"
+                    value="Fotografi"
+                    onChange={handleInterestChange}
+                  />
+                  <Radio
+                    color="gray"
+                    name="type"
+                    label="Lainnya"
+                    value="Lainnya"
+                    onChange={handleInterestChange}
+                  />
+                </div>
                 <Textarea
                   color="gray"
                   size="lg"
@@ -147,7 +442,12 @@ export function ContactForm() {
                   }}
                 />
                 <div className="w-full flex justify-end">
-                  <Button className="w-full md:w-fit" color="gray" size="md">
+                  <Button
+                    className="w-full md:w-fit"
+                    color="gray"
+                    size="md"
+                    type="submit"
+                  >
                     Kirim Pesan
                   </Button>
                 </div>
@@ -155,6 +455,18 @@ export function ContactForm() {
             </div>
           </CardBody>
         </Card>
+
+        {/* Conditional rendering for download status */}
+        {downloadStatus === "success" && (
+          <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-green-600 text-white p-4 rounded-md shadow-lg animate-bounce transition duration-7000 ease-in-out">
+            🎉 Form berhasil diunduh! Ayo segera kirimkan... 📄
+          </div>
+        )}
+        {submissionError && (
+          <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-red-600 text-white p-4 rounded-md shadow-lg animate-shake transition duration-7000 ease-in-out">
+            ❌ Pengiriman gagal karena: {submissionError}
+          </div>
+        )}
       </div>
     </section>
   );

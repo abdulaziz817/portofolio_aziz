@@ -7,6 +7,7 @@ import {
   ArrowRightIcon, // Ikon panah kanan untuk tombol
 } from "@heroicons/react/24/solid";
 import { ResumeItem } from "@/components";
+import React, { useState } from "react"; // Menambahkan useState
 
 const RESUME_ITEMS = [
   {
@@ -16,15 +17,20 @@ const RESUME_ITEMS = [
   {
     icon: ClipboardDocumentCheckIcon,
     children: "Sertifikat Kursus Desain Grafis",
-},
-{
+  },
+  {
     icon: ClipboardDocumentCheckIcon,
     children: "Sertifikat Penghargaan Lomba Desain Grafis",
-},
-
+  },
 ];
 
 export function Resume() {
+  const [isExpanded, setIsExpanded] = useState(false); // Menambahkan state untuk kontrol panjang teks
+
+  const handleExpand = () => {
+    setIsExpanded(!isExpanded); // Mengubah status saat tombol diklik
+  };
+
   return (
     <section className="px-8 py-24">
       <div className="container mx-auto grid w-full grid-cols-1 items-center gap-16 lg:grid-cols-2">
@@ -33,17 +39,20 @@ export function Resume() {
             Riwayat Hidup
           </Typography>
           <Typography className="mb-4 mt-3 w-9/12 font-normal !text-gray-500">
-            Desainer grafis berpengalaman dengan lebih dari 5 tahun dalam menciptakan desain visual yang menarik dan fungsional, baik untuk media cetak maupun digital.
+            {isExpanded
+              ? "Desainer grafis berpengalaman dengan lebih dari 5 tahun dalam menciptakan desain visual yang menarik dan fungsional, baik untuk media cetak maupun digital. Selain itu, saya memiliki kemampuan dalam manajemen proyek dan bekerja sama dalam tim untuk mencapai tujuan yang diinginkan."
+              : "Desainer grafis berpengalaman dengan lebih dari 5 tahun dalam menciptakan desain visual yang menarik dan fungsional, baik untuk media cetak maupun digital."}
           </Typography>
           <Button
             variant="text"
             color="gray"
             className="flex items-center gap-2"
+            onClick={handleExpand} // Menambahkan event handler untuk memperpanjang teks
           >
-            Lihat lebih lanjut
+            {isExpanded ? "Lihat lebih sedikit" : "Lihat lebih lanjut"}
             <ArrowRightIcon
               strokeWidth={3}
-              className="h-3.5 w-3.5 text-gray-900"
+              className={`h-3.5 w-3.5 text-gray-900 ${isExpanded ? "rotate-90" : ""}`}
             />
           </Button>
         </div>
