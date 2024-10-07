@@ -4,6 +4,11 @@ const LINKS = ["Beranda", "Tentang Kami", "Blog", "Layanan"];
 const CURRENT_YEAR = new Date().getFullYear();
 
 export function Footer() {
+  const handleSubscribe = () => {
+    // Redirect to WhatsApp chat
+    window.location.href = "https://wa.me/6287782535212";
+  };
+
   return (
     <footer className="mt-10 px-8 pt-20">
       <div className="container mx-auto">
@@ -13,6 +18,7 @@ export function Footer() {
             <a
               href="https://wa.me/6287782535212"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-blue-500 hover:underline"
             >
               Abdul Aziz
@@ -32,7 +38,9 @@ export function Footer() {
                 </Typography>
               </li>
             ))}
-            <Button color="gray">Berlangganan</Button>
+            <Button color="gray" onClick={handleSubscribe}>
+              Berlangganan
+            </Button>
           </ul>
         </div>
       </div>

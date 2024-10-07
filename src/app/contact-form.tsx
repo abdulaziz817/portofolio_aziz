@@ -456,17 +456,17 @@ export function ContactForm() {
           </CardBody>
         </Card>
 
-        {/* Conditional rendering for download status */}
         {downloadStatus === "success" && (
-          <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-green-600 text-white p-4 rounded-md shadow-lg animate-bounce transition duration-7000 ease-in-out">
-            🎉 Form berhasil diunduh! Ayo segera kirimkan... 📄
-          </div>
-        )}
-        {submissionError && (
-          <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-red-600 text-white p-4 rounded-md shadow-lg animate-shake transition duration-7000 ease-in-out">
-            ❌ Pengiriman gagal karena: {submissionError}
-          </div>
-        )}
+  <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-green-600 text-white p-4 rounded-md shadow-lg animate-bounce transition duration-700 ease-in-out">
+    🎉 Form berhasil diunduh! Ayo segera kirimkan... 📄
+  </div>
+)}
+{submissionError && (
+  <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-red-600 text-white p-4 rounded-md shadow-lg transition-transform transform translate-y-10 ease-in-out duration-300">
+    ❌ Pengiriman gagal karena: {submissionError}
+  </div>
+)}
+
       </div>
     </section>
   );

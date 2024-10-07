@@ -7,28 +7,20 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import {
-  HomeIcon,
-  LightBulbIcon,
-  FolderIcon,
-  DocumentTextIcon,
-  PhoneIcon,
   XMarkIcon,
   Bars3Icon,
 } from "@heroicons/react/24/solid";
 
+// Update NAV_MENU to remove the icons
 const NAV_MENU = [
   {
     name: "Rumah",
-    icon: HomeIcon,
   },
   {
     name: "Keahlian",
-    icon: LightBulbIcon,
   },
-
   {
     name: "Kontak",
-    icon: PhoneIcon,
   },
 ];
 
@@ -77,10 +69,9 @@ export function Navbar() {
           Abdul Aziz
         </Typography>
         <ul className="ml-10 hidden items-center gap-8 lg:flex">
-          {NAV_MENU.map(({ name, icon: Icon, href }) => (
-            <NavItem key={name} href={href}>
-              <Icon className="h-5 w-5" />
-              {name}
+          {NAV_MENU.map(({ name }) => (
+            <NavItem key={name}>
+              {name} {/* Display the name only, without icons */}
             </NavItem>
           ))}
         </ul>
@@ -107,10 +98,9 @@ export function Navbar() {
       <Collapse open={open}>
         <div className="container mx-auto mt-3 border-t border-gray-200 px-2 pt-4">
           <ul className="flex flex-col gap-4">
-            {NAV_MENU.map(({ name, icon: Icon, href }) => (
-              <NavItem key={name} href={href}>
-                <Icon className="h-5 w-5" />
-                {name}
+            {NAV_MENU.map(({ name }) => (
+              <NavItem key={name}>
+                {name} {/* Display the name only, without icons */}
               </NavItem>
             ))}
           </ul>
