@@ -34,7 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/app/contact-form.jsx", "src/app/projects.jsx", "src/app/hero.jsx", "src/app/page.jsx", "src/app/popular-clients.jsx", "src/app/resume.jsx", "src/app/skills.jsx", "src/app/testimonial.jsx", "src/app/clients.jsx", "src/app/layout.jsx", "src/components/fixed-plugin.jsx", "src/components/footer.jsx", "src/components/layout.jsx", "src/components/navbar.jsx", "src/components/project-card.jsx", "src/components/resume-item.jsx", "src/components/skill-card.jsx"  ],
   "exclude": [
     "node_modules"
   ]

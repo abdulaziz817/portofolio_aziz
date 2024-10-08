@@ -7,13 +7,8 @@ import {
   Button,
 } from "@material-tailwind/react";
 
-interface ProjectCardProps {
-  img: string;
-  title: string;
-  desc: string;
-}
 
-export function ProjectCard({ img, title, desc }: ProjectCardProps) {
+export function ProjectCard({ img, title, desc }) {
   return (
     <Card color="transparent" shadow={false}>
       <CardHeader floated={false} className="mx-0 mt-0 mb-6 h-48">

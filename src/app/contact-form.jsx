@@ -23,7 +23,7 @@ export function ContactForm() {
   const [selectedInterests, setSelectedInterests] = useState([]); // Track selected interests
   const [submissionError, setSubmissionError] = useState(null); // State for error messages
 
-  const handleInterestChange = (e: any) => {
+  const handleInterestChange = (e) => {
     const value = e.target.value;
     if (selectedInterests.includes(value)) {
       // Jika minat sudah dipilih, hapus dari array
@@ -36,7 +36,7 @@ export function ContactForm() {
     }
   };
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setSubmissionError(null); // Clear previous error messages
 

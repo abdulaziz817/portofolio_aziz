@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image"; // Import Image dari next/image
 import { Typography } from "@material-tailwind/react";
 
 // Data proyek
@@ -35,7 +36,13 @@ const PROYEK = [
 export function ProjectCard({ img, title, desc, link }) {
   return (
     <div className="project-card bg-white shadow-md rounded-lg overflow-hidden">
-      <img src={img} alt={title} className="w-full h-48 object-cover" />
+      <Image
+        src={img}
+        alt={title}
+        width={500} // Lebar gambar (sesuaikan dengan ukuran yang diinginkan)
+        height={300} // Tinggi gambar (sesuaikan dengan ukuran yang diinginkan)
+        className="w-full h-48 object-cover"
+      />
       <div className="p-4">
         <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
         <p className="mt-2 text-gray-600">{desc}</p>

@@ -24,12 +24,8 @@ const NAV_MENU = [
   },
 ];
 
-interface NavItemProps {
-  children: React.ReactNode;
-  href?: string;
-}
 
-function NavItem({ children, href }: NavItemProps) {
+function NavItem({ children, href }) {
   return (
     <li>
       <Typography

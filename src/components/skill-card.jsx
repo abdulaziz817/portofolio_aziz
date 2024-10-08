@@ -1,12 +1,7 @@
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 
-interface SkillCardProps {
-  title: string;
-  icon: React.ElementType;
-  children: React.ReactNode;
-}
 
-export function SkillCard({ icon: Icon, title, children }: SkillCardProps) {
+export function SkillCard({ icon: Icon, title, children }) {
   return (
     <Card color="transparent" shadow={false}>
       <CardBody className="grid justify-center text-center">
