@@ -6,24 +6,13 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
-import {
-  XMarkIcon,
-  Bars3Icon,
-} from "@heroicons/react/24/solid";
+import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/solid";
 
-// Update NAV_MENU to remove the icons
+// Update NAV_MENU to contain only Instagram and WhatsApp links
 const NAV_MENU = [
-  {
-    name: "Rumah",
-  },
-  {
-    name: "Keahlian",
-  },
-  {
-    name: "Kontak",
-  },
+  { name: "Instagram", href: "https://www.instagram.com/zizzz.dul_/?hl=en" },
+  { name: "WhatsApp", href: "https://wa.me/6287782535212" },
 ];
-
 
 function NavItem({ children, href }) {
   return (
@@ -60,19 +49,18 @@ export function Navbar() {
         <Typography
           as="span"
           variant="h6"
-          className="font-bold text-gray-900 text-2xl "
+          className="font-bold text-gray-900 text-2xl"
         >
           Abdul Aziz
         </Typography>
         <ul className="ml-10 hidden items-center gap-8 lg:flex">
-          {NAV_MENU.map(({ name }) => (
-            <NavItem key={name}>
+          {NAV_MENU.map(({ name, href }) => (
+            <NavItem key={name} href={href}>
               {name} {/* Display the name only, without icons */}
             </NavItem>
           ))}
         </ul>
         <div className="hidden items-center gap-2 lg:flex">
-          <Button variant="text">Daftar</Button>
           <a href="/image/CV_Abdul_Aziz.pdf" download="CV">
             {/* Tombol Unduh CV */}
             <Button color="gray">Unduh CV</Button>
@@ -94,14 +82,13 @@ export function Navbar() {
       <Collapse open={open}>
         <div className="container mx-auto mt-3 border-t border-gray-200 px-2 pt-4">
           <ul className="flex flex-col gap-4">
-            {NAV_MENU.map(({ name }) => (
-              <NavItem key={name}>
+            {NAV_MENU.map(({ name, href }) => (
+              <NavItem key={name} href={href}>
                 {name} {/* Display the name only, without icons */}
               </NavItem>
             ))}
           </ul>
           <div className="mt-6 mb-4 flex items-center gap-2">
-            <Button variant="text">Daftar</Button>
             <a href="/image/CV_Abdul_Aziz.pdf" download="CV">
               <Button color="gray">Unduh CV</Button>
             </a>

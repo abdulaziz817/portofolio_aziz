@@ -1,9 +1,8 @@
 // components
-import { Navbar, Footer } from "@/components";
+import { Navbar, Footer } from "@/components"; // Ensure correct path
 
 // sections
 import Hero from "./hero";
-// import Clients from "./clients";
 import Skills from "./skills";
 import Projects from "./projects";
 import Resume from "./resume";
@@ -16,7 +15,6 @@ export default function Portfolio() {
     <>
       <Navbar />
       <Hero />
-      {/* <Clients /> */}
       <Skills />
       <Projects />
       <Resume />
