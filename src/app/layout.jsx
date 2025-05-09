@@ -25,9 +25,9 @@ export default function RootLayout({
           // data-site="YOUR_LOGO_URL_HERE"
           // src="https://api.nepcha.com/js/nepcha-analytics.js"
         ></script>
-        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+        <link rel="shortcut icon" href="/Logo.png" type="image/png" />
         {/* If you want the logo as a favicon, ensure the correct path */}
-        <link rel="icon" href="/image/logo.png" type="image/png" />
+        <link rel="icon" href="/image/Logo.png" type="image/png" />
       </head>
       <body className={roboto.className}>
         <Layout>

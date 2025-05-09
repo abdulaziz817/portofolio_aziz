@@ -59,21 +59,6 @@ export function ContactForm() {
       setSubmissionError("Email harus menggunakan domain @gmail.com.");
       return;
     }
-
-    // Validate phone starts with +62
-    if (!phone.startsWith("+62")) {
-      setSubmissionError("Telepon harus berawalan +62.");
-      return;
-    }
-
-    // Validate phone is a valid number
-    if (!/^\+62\d{9,12}$/.test(phone)) {
-      setSubmissionError(
-        "Nomor telepon harus berupa angka yang valid antara 10-13 digit.(tanpa spasi)"
-      );
-      return;
-    }
-
     // Limit form submissions to 2 times for the same email
     if (!emailSubmissionCount[email]) {
       emailSubmissionCount[email] = 0;
@@ -207,8 +192,8 @@ export function ContactForm() {
 
       setTimeout(() => {
         setDownloadStatus(null);
-      }, 2000);
-    }, 2000);
+      }, 1000);
+    }, 1000);
 
     // Handle WhatsApp API link (optional)
     const phoneNumber = "087782535212";

@@ -1,117 +1,129 @@
 "use client";
 
 import React from "react";
-import { Typography, Card, CardBody } from "@material-tailwind/react";
+import { motion } from "framer-motion";
+import { Typography } from "@material-tailwind/react";
 import {
   BriefcaseIcon,
   LightBulbIcon,
   ChatBubbleLeftRightIcon,
-} from "@heroicons/react/24/outline"; // You can adjust the icons library as per your preference
+} from "@heroicons/react/24/outline";
 
 export function WhyChooseDesigner() {
-  const [active, setActive] = React.useState(3);
+  const [active, setActive] = React.useState(0);
 
-  // Reasons to choose a designer
   const reasons = [
     {
       title: "Keahlian Profesional",
       description:
-        "Seorang desainer grafis profesional dapat mengubah ide abstrak menjadi visual yang memukau dan efektif.",
+        "Desainer grafis profesional mampu mengubah ide menjadi visual yang menarik dan fungsional.",
       name: "Keunggulan Desain",
-      position: "Pengalaman lebih dari 5 tahun di bidang desain grafis.",
-      icon: <BriefcaseIcon className="h-12 w-12 text-blue-gray-500" />, // Icon for professional expertise
+      position: "Berpengalaman lebih dari 5 tahun dalam bidang desain grafis.",
+      icon: BriefcaseIcon,
     },
     {
       title: "Kreativitas Tak Terbatas",
       description:
-        "Desain grafis membawa kreativitas tanpa batas ke dalam setiap proyek, menghasilkan solusi yang unik dan menarik.",
+        "Setiap desain membawa nilai unik dan kreatif untuk meningkatkan daya tarik visual brand Anda.",
       name: "Inspirasi Kreatif",
-      position: "Menangani proyek desain media sosial hingga cetak.",
-      icon: <LightBulbIcon className="h-12 w-12 text-blue-gray-500" />, // Icon for creativity
+      position: "Menghandle berbagai proyek dari media sosial hingga branding.",
+      icon: LightBulbIcon,
     },
     {
       title: "Komunikasi Visual Efektif",
       description:
-        "Menyampaikan pesan dengan desain visual yang jelas dan kuat adalah kunci kesuksesan sebuah proyek.",
+        "Komunikasi yang kuat dimulai dari visual yang tepat dan berkesan.",
       name: "Pesan yang Efektif",
-      position: "Membantu klien meningkatkan brand awareness.",
-      icon: (
-        <ChatBubbleLeftRightIcon className="h-12 w-12 text-blue-gray-500" />
-      ), // Icon for effective communication
+      position: "Telah membantu berbagai klien membangun kesadaran merek.",
+      icon: ChatBubbleLeftRightIcon,
     },
   ];
 
   return (
-    <section className="py-12 px-8 lg:py-24">
-      <div className="container max-w-screen-lg mx-auto">
-        <div className="container mx-auto mb-20 text-center">
-          <Typography variant="h2" color="blue-gray" className="mb-4">
-            Kenapa Harus Pilih Desainer Grafis?
-          </Typography>
-          <Typography
-            variant="lead"
-            className="mx-auto w-full px-4 font-normal !text-gray-500 lg:w-8/12"
-          >
-            Berikut adalah alasan mengapa memilih seorang desainer grafis profesional bisa membuat proyek Anda sukses.
-          </Typography>
-        </div>
-        <Card color="transparent" shadow={false} className="py-8 lg:flex-row">
-          <CardBody className="w-full lg:gap-10 h-full lg:!flex justify-between ">
-            <div className="w-full mb-10 lg:mb-0">
-              <Typography
-                variant="h3"
-                color="blue-gray"
-                className="mb-4 font-bold lg:max-w-xs"
+    <section className="py-20 px-6 bg-white">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="text-center mb-16 max-w-2xl mx-auto"
+      >
+        <Typography variant="h2" color="blue-gray" className="font-bold mb-4">
+          Kenapa Harus Pilih Desainer Grafis?
+        </Typography>
+        <Typography variant="lead" className="text-gray-600">
+          Pilihan tepat untuk hasil yang maksimal. Berikut alasan kenapa Anda
+          perlu memilih desainer grafis profesional.
+        </Typography>
+      </motion.div>
+
+      {/* Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        {reasons.map((reason, index) => {
+          const Icon = reason.icon;
+          const isActive = active === index;
+
+          return (
+            <motion.div
+              key={index}
+              onClick={() => setActive(index)}
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: "easeInOut", delay: index * 0.3 }}
+              viewport={{ once: true }}
+              whileHover={{
+                scale: 1.07,
+                boxShadow: "0px 20px 60px rgba(0, 0, 0, 0.1)",
+              }}
+              className={`relative overflow-hidden p-8 border rounded-3xl cursor-pointer transition-all duration-700 ease-in-out group ${
+                isActive
+                  ? "bg-white border-blue-500 ring-2 ring-blue-300 shadow-2xl scale-[1.03]"
+                  : "bg-white border-gray-200"
+              }`}
+            >
+              {/* Shine effect */}
+              <motion.div
+                className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-to-tr from-transparent via-white to-transparent opacity-10 rotate-45 pointer-events-none"
+                animate={{ x: [0, 100], y: [0, 100] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "linear" }}
+              />
+
+              {/* Icon */}
+              <div
+                className={`w-16 h-16 flex items-center justify-center rounded-full mb-5 shadow-md transition-all duration-500 ${
+                  isActive ? "bg-blue-600 text-white" : "bg-gray-100 text-blue-gray-500"
+                }`}
               >
-                {reasons[active - 1].title}
-              </Typography>
-              <Typography className="mb-3 w-full lg:w-8/12 font-normal !text-gray-500">
-                {reasons[active - 1].description}
-              </Typography>
-              <Typography variant="h6" color="blue-gray" className="mb-0.5">
-                {reasons[active - 1].name}
-              </Typography>
-              <Typography
-                variant="small"
-                className="font-normal mb-5 !text-gray-500"
-              >
-                {reasons[active - 1].position}
-              </Typography>
-              <div className="flex items-center gap-4">
-                <div
-                  className={`cursor-pointer ${
-                    active === 1 ? "opacity-100" : "opacity-50"
-                  }`}
-                  onClick={() => setActive(1)}
-                >
-                  <BriefcaseIcon className="h-8 w-8 text-blue-gray-500" />
-                </div>
-                <div className="w-[1px] h-[36px] bg-blue-gray-100"></div>
-                <div
-                  className={`cursor-pointer ${
-                    active === 2 ? "opacity-100" : "opacity-50"
-                  }`}
-                  onClick={() => setActive(2)}
-                >
-                  <LightBulbIcon className="h-8 w-8 text-blue-gray-500" />
-                </div>
-                <div className="w-[1px] h-[36px] bg-blue-gray-100"></div>
-                <div
-                  className={`cursor-pointer ${
-                    active === 3 ? "opacity-100" : "opacity-50"
-                  }`}
-                  onClick={() => setActive(3)}
-                >
-                  <ChatBubbleLeftRightIcon className="h-8 w-8 text-blue-gray-500" />
-                </div>
+                <Icon className="w-8 h-8" />
               </div>
-            </div>
-            <div className="h-[21rem] w-full sm:w-[18rem] shrink-0 flex items-center justify-center">
-              {/* Display the static icon based on active reason */}
-              {reasons[active - 1].icon}
-            </div>
-          </CardBody>
-        </Card>
+
+              {/* Content */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 1 }}
+              >
+                <Typography
+                  variant="h5"
+                  color="blue-gray"
+                  className="font-semibold mb-2"
+                >
+                  {reason.title}
+                </Typography>
+                <Typography className="text-gray-600 mb-4">
+                  {reason.description}
+                </Typography>
+                <Typography variant="h6" color="blue-gray">
+                  {reason.name}
+                </Typography>
+                <Typography variant="small" className="text-gray-500">
+                  {reason.position}
+                </Typography>
+              </motion.div>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );

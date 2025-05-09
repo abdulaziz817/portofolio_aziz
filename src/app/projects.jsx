@@ -1,82 +1,94 @@
 "use client";
-
-import Image from "next/image"; // Import Image dari next/image
 import { Typography } from "@material-tailwind/react";
+import { Palette } from "lucide-react";
+import {
+  Smartphone,
+  Globe,
+  ShoppingCart,
+  LayoutDashboard,
+} from "lucide-react";
+import { motion } from "framer-motion";
 
 // Data proyek
 const PROYEK = [
   {
-    img: "/image/blog-1.svg",
-    title: "Pengembangan Aplikasi Mobile",
-    desc: "Aplikasi mobile yang dirancang untuk membantu pengguna menemukan dan menjelajahi restoran serta kuliner lokal.",
+    icon: Smartphone,
+    title: "Aplikasi Mobile",
+    desc: "Aplikasi untuk menjelajahi restoran & kuliner lokal dengan pengalaman pengguna yang intuitif dan elegan.",
     link: "https://github.com/abdulaziz817?tab=repositories",
   },
   {
-    img: "/image/blog2.svg",
-    title: "Pengembangan Halaman Landing",
-    desc: "Halaman promosi untuk situs web kebugaran dalam kampanye musim panas. Termasuk pengembangan formulir.",
+    icon: Globe,
+    title: "Landing Page",
+    desc: "Halaman promosi modern untuk brand kebugaran, dirancang responsif dan fokus pada konversi pengguna.",
     link: "https://github.com/abdulaziz817?tab=repositories",
   },
   {
-    img: "/image/blog3.svg",
-    title: "Pengembangan Aplikasi Mobile",
-    desc: "Aplikasi mobile yang dirancang untuk membantu pengguna menemukan dan menjelajahi restoran serta kuliner lokal.",
+    icon: Palette,
+    title: "Desain Grafis",
+    desc: "Berbagai karya desain grafis seperti poster, logo, banner, dan konten media sosial dengan estetika profesional.",
     link: "https://github.com/abdulaziz817?tab=repositories",
   },
+  
   {
-    img: "/image/blog4.svg",
-    title: "Pengembangan E-commerce",
-    desc: "Situs web e-commerce yang menawarkan akses ke gadget dan aksesori terbaru dan terbaik.",
+    icon: ShoppingCart,
+    title: "Website E-commerce",
+    desc: "Toko online yang responsif dan elegan, menampilkan produk teknologi terbaru dengan UI modern.",
     link: "https://github.com/abdulaziz817?tab=repositories",
   },
-  // Tambahkan lebih banyak proyek di sini jika diperlukan
 ];
 
-// Komponen ProjectCard
-export function ProjectCard({ img, title, desc, link }) {
+// Komponen Card Proyek
+function ProjectCard({ icon: Icon, title, desc, link }) {
   return (
-    <div className="project-card bg-white shadow-md rounded-lg overflow-hidden">
-      <Image
-        src={img}
-        alt={title}
-        width={500} // Lebar gambar (sesuaikan dengan ukuran yang diinginkan)
-        height={300} // Tinggi gambar (sesuaikan dengan ukuran yang diinginkan)
-        className="w-full h-48 object-cover"
-      />
-      <div className="p-4">
-        <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
-        <p className="mt-2 text-gray-600">{desc}</p>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: true }}
+      className="backdrop-blur-sm bg-white/70 border border-gray-200 rounded-3xl p-6 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300"
+    >
+      <div className="flex justify-center mb-5">
+        <div className="bg-gradient-to-tr from-gray-100 to-white shadow-inner p-4 rounded-full">
+          <Icon size={32} className="text-gray-800" />
+        </div>
+      </div>
+      <h3 className="text-lg font-semibold text-center text-gray-900 mb-3 tracking-wide">
+        {title}
+      </h3>
+      <p className="text-gray-600 text-sm text-justify leading-relaxed line-clamp-4">
+        {desc}
+      </p>
+      <div className="mt-4 text-center">
         <a
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block mt-4 text-blue-500 hover:underline"
+          className="text-blue-600 text-sm font-medium hover:underline"
         >
-          See Details
+          Lihat detail
         </a>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
-// Komponen Proyek yang menampilkan ProjectCard
+// Komponen Utama
 export function Proyek() {
   return (
-    <section className="py-28 px-8">
+    <section className="py-28 px-8 bg-white">
       <div className="container mx-auto mb-20 text-center">
-        <Typography variant="h2" color="blue-gray" className="mb-4">
+        <Typography variant="h2" color="blue-gray" className="mb-4 font-extrabold">
           Proyek Saya
         </Typography>
         <Typography
           variant="lead"
-          className="mx-auto w-full px-4 font-normal !text-gray-500 lg:w-6/12"
+          className="mx-auto w-full px-4 font-normal !text-gray-600 lg:w-6/12"
         >
-          Apakah Anda memiliki ide aplikasi mobile yang perlu diwujudkan atau
-          situs web yang butuh penyegaran? Saya di sini untuk mewujudkan impian
-          digital Anda menjadi kenyataan.
+          Dari aplikasi mobile hingga dashboard dan e-commerce, saya bangun produk digital yang modern dan sesuai kebutuhan Anda.
         </Typography>
       </div>
-      <div className="container mx-auto grid grid-cols-1 gap-x-10 gap-y-20 md:grid-cols-2 xl:grid-cols-4">
+      <div className="container mx-auto grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-4">
         {PROYEK.map((props, idx) => (
           <ProjectCard key={idx} {...props} />
         ))}

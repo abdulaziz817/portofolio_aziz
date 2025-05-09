@@ -33,7 +33,7 @@ export function ProjectCard({ img, title, desc }) {
           {desc}
         </Typography>
         <Button color="gray" size="sm">
-          see details
+          Lihat Projek
         </Button>
       </CardBody>
     </Card>

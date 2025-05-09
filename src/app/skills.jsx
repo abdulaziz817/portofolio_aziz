@@ -2,97 +2,91 @@
 
 import { Typography } from "@material-tailwind/react";
 import {
-  PencilSquareIcon, // Desain Grafis (ikon pensil sebagai simbol desain)
-  CameraIcon, // Fotografi (ikon kamera)
-  DevicePhoneMobileIcon, // UI/UX (ikon perangkat mobile sebagai simbol UI/UX)
-  SparklesIcon, // Canva (ikon kilau atau kreativitas)
-  PaintBrushIcon, // CorelDRAW (ikon kuas sebagai simbol ilustrasi)
-  PhotoIcon, // Adobe (ikon gambar sebagai simbol software desain Adobe)
-  ComputerDesktopIcon, // Figma (ikon komputer atau perangkat digital)
-  DocumentTextIcon, // Microsoft Office (ikon dokumen sebagai simbol administrasi)
+  PencilSquareIcon,
+  CameraIcon,
+  CodeBracketIcon,
 } from "@heroicons/react/24/solid";
-import { SkillCard } from "@/components";
+import { motion } from "framer-motion";
 
-const KEAHLIAN = [
+const skills = [
   {
     icon: PencilSquareIcon,
     title: "Desain Grafis",
-    children:
-      "Menciptakan desain visual yang menarik dan fungsional untuk berbagai platform, baik media cetak maupun digital.",
+    description:
+      "Merancang identitas visual, layout media sosial, branding, hingga materi cetak yang konsisten dan menarik.",
+  },
+  {
+    icon: CodeBracketIcon,
+    title: "Web Development",
+    description:
+      "Mengembangkan antarmuka website yang interaktif dan dinamis dengan teknologi terkini dan desain responsif.",
   },
   {
     icon: CameraIcon,
     title: "Fotografi",
-    children:
-      "Menghasilkan foto-foto berkualitas tinggi yang menangkap momen-momen penting dengan estetika visual yang menarik.",
+    description:
+      "Menangkap momen dengan komposisi yang kuat, pencahayaan optimal, dan gaya visual yang estetis.",
   },
-  {
-    icon: DevicePhoneMobileIcon,
-    title: "UI/UX",
-    children:
-      "Merancang pengalaman pengguna yang intuitif dan interaktif dengan pendekatan user-centric untuk aplikasi dan website.",
-  },
-  {
-    icon: SparklesIcon,
-    title: "Canva",
-    children:
-      "Menggunakan Canva untuk membuat desain yang cepat dan profesional untuk berbagai keperluan, seperti poster, media sosial, dan presentasi.",
-  },
-  {
-    icon: PaintBrushIcon,
-    title: "CorelDRAW",
-    children:
-      "Menguasai CorelDRAW untuk menciptakan ilustrasi, logo, dan desain vektor dengan presisi tinggi.",
-  },
-  {
-    icon: PhotoIcon,
-    title: "Adobe",
-    children:
-      "Berpengalaman menggunakan berbagai software Adobe untuk desain grafis, termasuk Photoshop, Illustrator, dan lainnya.",
-  },
-  {
-    icon: ComputerDesktopIcon,
-    title: "Figma",
-    children:
-      "Menggunakan Figma untuk kolaborasi desain UI/UX yang efisien, baik untuk prototyping maupun handoff kepada developer.",
-  },
-  {
-    icon: DocumentTextIcon,
-    title: "Microsoft Office",
-    children:
-      "Menguasai Microsoft Office untuk keperluan administrasi, penyusunan dokumen, presentasi, dan analisis data.",
-  },
-  
-
 ];
 
-export function Skills() {
+export default function Skills() {
   return (
-    <section className="px-8">
-      <div className="container mx-auto mb-20 text-center">
-        <Typography color="blue-gray" className="mb-2 font-bold uppercase">
+    <section className="bg-white px-6 py-24 overflow-hidden">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.3, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="text-center mb-20 max-w-2xl mx-auto"
+      >
+        <Typography
+          className="uppercase text-xl font-semibold tracking-widest text-gray-700 mb-2"
+        >
           Keahlian Saya
         </Typography>
-        <Typography variant="h1" color="blue-gray" className="mb-4">
+        <Typography
+          variant="h1"
+          className="text-4xl font-bold text-gray-900 mb-4"
+        >
           Apa yang Saya Lakukan
         </Typography>
-        <Typography
-          variant="lead"
-          className="mx-auto w-full !text-gray-500 lg:w-10/12"
-        >
-          Saya tidak hanya seorang desainer; saya adalah seorang kreator
-          pengalaman digital. Merancang desain yang immersive bukan hanya
-          pekerjaan, tetapi panggilan hidup saya. Temukan di bawah bagaimana
-          saya dapat membantu Anda.
+        <Typography variant="lead" className="text-gray-600">
+          Menciptakan solusi kreatif dan teknis untuk dunia digital dan visual dengan hasil berkualitas tinggi.
         </Typography>
-      </div>
-      <div className="container mx-auto grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-        {KEAHLIAN.map((props, idx) => (
-          <SkillCard key={idx} {...props} />
-        ))}
+      </motion.div>
+
+      {/* Skills Timeline */}
+      <div className="relative max-w-6xl mx-auto grid md:grid-cols-3 gap-12">
+        {skills.map((item, index) => {
+          const Icon = item.icon;
+
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.8, y: 50 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{
+                duration: 1.2,
+                delay: index * 0.2,
+                ease: "easeOut",
+              }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center text-center px-4"
+            >
+              <div className="bg-white border border-gray-300 rounded-full p-6 shadow-md mb-6">
+                <Icon className="h-10 w-10 text-black" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">
+                {item.title}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                {item.description}
+              </p>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );
 }
-
-export default Skills;
