@@ -3,13 +3,12 @@
 import React from "react";
 import {
   Navbar as MTNavbar,
-  Collapse,
   Button,
   IconButton,
   Typography,
 } from "@material-tailwind/react";
 import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/solid";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const NAV_MENU = [
   { name: "Instagram", href: "https://www.instagram.com/zizzzdul_/?hl=en" },
@@ -47,9 +46,7 @@ function DesktopCVButton() {
   return (
     <div className="hidden lg:flex">
       <a href="/image/CV_Abdul_Aziz.pdf" download="CV_Abdul_Aziz">
-        <Button
-          className="bg-black text-white hover:bg-gray-900 shadow-md hover:shadow-lg transition-all duration-300"
-        >
+        <Button className="bg-black text-white hover:bg-gray-900 shadow-md hover:shadow-lg transition-all duration-300">
           Unduh CV
         </Button>
       </a>
@@ -82,59 +79,75 @@ export function Navbar() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-        <Typography
-  as="span"
-  variant="h5"
-  className="font-bold text-gray-900 text-2xl"
->
-  Abdul <span className="text-black-600">Aziz</span>
-</Typography>
-
+          <Typography as="span" variant="h5" className="font-bold text-gray-900 text-2xl">
+            Abdul <span className="text-black-600">Aziz</span>
+          </Typography>
         </motion.div>
 
         <DesktopNav />
         <DesktopCVButton />
 
-        <IconButton
-          variant="text"
-          color="gray"
-          onClick={handleOpen}
+        <motion.div
+          whileTap={{ scale: 0.9 }}
           className="ml-auto lg:hidden"
         >
-          {open ? (
-            <XMarkIcon className="h-6 w-6" />
-          ) : (
-            <Bars3Icon className="h-6 w-6" />
-          )}
-        </IconButton>
+          <IconButton variant="text" color="gray" onClick={handleOpen}>
+            {open ? (
+              <motion.div
+                key="x"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <XMarkIcon className="h-6 w-6" />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="bars"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Bars3Icon className="h-6 w-6" />
+              </motion.div>
+            )}
+          </IconButton>
+        </motion.div>
       </div>
 
-      {/* Mobile Menu */}
-      <Collapse open={open}>
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={open ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.3 }}
-          className="container mx-auto px-4 py-4"
-        >
-          <ul className="flex flex-col gap-4 mb-4">
-            {NAV_MENU.map(({ name, href }) => (
-              <NavItem key={name} href={href}>
-                {name}
-              </NavItem>
-            ))}
-          </ul>
-          <a href="/image/CV_Abdul_Aziz.pdf" download="CV_Abdul_Aziz">
-            <Button
-              color="gray"
-              fullWidth
-              className="transition-all duration-300 hover:scale-[1.03]"
-            >
-              Unduh CV
-            </Button>
-          </a>
-        </motion.div>
-      </Collapse>
+      {/* Mobile Menu with Animation */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden bg-white/80 backdrop-blur-md border-t border-gray-200"
+          >
+            <div className="container mx-auto px-4 py-6">
+              <ul className="flex flex-col gap-6 mb-6 text-center">
+                {NAV_MENU.map(({ name, href }) => (
+                  <NavItem key={name} href={href}>
+                    {name}
+                  </NavItem>
+                ))}
+              </ul>
+              <a href="/image/CV_Abdul_Aziz.pdf" download="CV_Abdul_Aziz">
+                <Button
+                  color="gray"
+                  fullWidth
+                  className="transition-all duration-300 hover:scale-[1.03]"
+                >
+                  Unduh CV
+                </Button>
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </MTNavbar>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Typography } from "@material-tailwind/react";
 import {
@@ -39,13 +39,21 @@ export function WhyChooseDesigner() {
     },
   ];
 
+  // Auto-highlight setiap 4 detik
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActive((prev) => (prev + 1) % reasons.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [reasons.length]);
+
   return (
-    <section className="py-20 px-6 bg-white">
+    <section className="py-20 px-6 bg-gradient-to-b from-white via-white-50 to-white">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        transition={{ duration: 1 }}
         viewport={{ once: true }}
         className="text-center mb-16 max-w-2xl mx-auto"
       >
@@ -70,15 +78,12 @@ export function WhyChooseDesigner() {
               onClick={() => setActive(index)}
               initial={{ opacity: 0, scale: 0.8, y: 30 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 1.2, ease: "easeInOut", delay: index * 0.3 }}
+              transition={{ duration: 1, delay: index * 0.3 }}
               viewport={{ once: true }}
-              whileHover={{
-                scale: 1.07,
-                boxShadow: "0px 20px 60px rgba(0, 0, 0, 0.1)",
-              }}
-              className={`relative overflow-hidden p-8 border rounded-3xl cursor-pointer transition-all duration-700 ease-in-out group ${
+              whileHover={{ scale: 1.07 }}
+              className={`relative overflow-hidden p-8 border rounded-3xl cursor-pointer transition-all duration-700 group shadow-lg ${
                 isActive
-                  ? "bg-white border-blue-500 ring-2 ring-blue-300 shadow-2xl scale-[1.03]"
+                  ? "bg-white border-blue-500 ring-2 ring-blue-300 scale-[1.03] animate-pulse"
                   : "bg-white border-gray-200"
               }`}
             >
@@ -89,20 +94,32 @@ export function WhyChooseDesigner() {
                 transition={{ repeat: Infinity, duration: 5, ease: "linear" }}
               />
 
-              {/* Icon */}
+              {/* Icon with ripple animation */}
               <div
-                className={`w-16 h-16 flex items-center justify-center rounded-full mb-5 shadow-md transition-all duration-500 ${
+                className={`w-16 h-16 flex items-center justify-center rounded-full mb-5 shadow-md relative transition-all duration-500 ${
                   isActive ? "bg-blue-600 text-white" : "bg-gray-100 text-blue-gray-500"
                 }`}
               >
-                <Icon className="w-8 h-8" />
+                <Icon className="w-8 h-8 z-10" />
+                {isActive && (
+                  <motion.span
+                    className="absolute w-16 h-16 rounded-full border-2 border-blue-300"
+                    initial={{ scale: 1, opacity: 1 }}
+                    animate={{ scale: 1.8, opacity: 0 }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeOut",
+                    }}
+                  />
+                )}
               </div>
 
               {/* Content */}
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 1 }}
+                transition={{ delay: 0.4 + index * 0.2, duration: 1 }}
               >
                 <Typography
                   variant="h5"
