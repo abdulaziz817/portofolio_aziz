@@ -24,7 +24,7 @@ export function Footer() {
           <Typography className="text-gray-700 text-sm md:text-base text-center md:text-left">
             &copy; {CURRENT_YEAR} Hak cipta dilindungi.{" "}
             <a
-              href="https://wa.me/6287782535212"
+              href="https://wa.me/6287860592111"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline"

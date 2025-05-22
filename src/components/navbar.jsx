@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const NAV_MENU = [
   { name: "Instagram", href: "https://www.instagram.com/zizzzdul_/?hl=en" },
-  { name: "WhatsApp", href: "https://wa.me/6287782535212" },
+  { name: "WhatsApp", href: "https://wa.me/6287860592111" },
 ];
 
 function NavItem({ children, href }) {

@@ -236,7 +236,7 @@ export function ContactForm() {
               <div className="flex gap-5">
                 <PhoneIcon className="h-6 w-6 text-white" />
                 <Typography variant="h6" color="white" className="mb-2">
-                  +62 877 8253 5212
+                  +62 878 6059 2111
                 </Typography>
               </div>
               <div className="flex my-2 gap-5">
@@ -250,17 +250,6 @@ export function ContactForm() {
                 <Typography variant="h6" color="white" className="mb-2">
                   Buka Tiket Dukungan
                 </Typography>
-              </div>
-              <div className="flex items-center gap-5">
-                <IconButton variant="text" color="white">
-                  <i className="fa-brands fa-facebook text-lg" />
-                </IconButton>
-                <IconButton variant="text" color="white">
-                  <i className="fa-brands fa-instagram text-lg" />
-                </IconButton>
-                <IconButton variant="text" color="white">
-                  <i className="fa-brands fa-github text-lg" />
-                </IconButton>
               </div>
             </div>
             <div className="w-full mt-8 md:mt-0 md:px-10 col-span-4 h-full p-5">
@@ -307,7 +296,7 @@ export function ContactForm() {
                     variant="static"
                     label="Telepon"
                     name="phone"
-                    placeholder="contoh: +62 877 8253 5212"
+                    placeholder="contoh: +62 878 6059 2111"
                     containerProps={{
                       className: "!min-w-full",
                     }}

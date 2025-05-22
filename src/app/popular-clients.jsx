@@ -16,58 +16,75 @@ const ICONS = [
   { icon: HiOutlineDevicePhoneMobile, label: "UI/UX" },
 ];
 
-// Animasi masuk elegan
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.2,
+    },
+  },
+};
+
 const cardVariants = {
   hidden: { opacity: 0, scale: 0.9, y: 40 },
-  visible: (i) => ({
+  visible: {
     opacity: 1,
     scale: 1,
     y: 0,
     transition: {
-      delay: i * 0.15,
-      duration: 0.6,
-      ease: "easeOut",
+      type: "spring",
+      stiffness: 100,
+      damping: 12,
     },
-  }),
+  },
 };
 
 export function KlienPopuler() {
   return (
-    <section className="bg-white text-black px-6 py-20">
+    <section className="bg-gradient-to-br from-white via-gray-50 to-white text-black px-6 py-24 overflow-hidden">
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
         viewport={{ once: true }}
-        className="text-center mb-12"
+        className="text-center mb-16"
       >
-        <Typography variant="h6" className="uppercase text-gray-600 tracking-widest mb-2">
+        <Typography variant="h6" className="uppercase text-gray-600 tracking-[0.25em] mb-2">
           Klien Populer
         </Typography>
-        <Typography variant="h2" className="text-black font-bold">
+        <Typography variant="h2" className="text-black font-bold text-3xl sm:text-4xl">
           Dipercaya oleh 100+ Klien
         </Typography>
       </motion.div>
 
-      <div className="flex flex-wrap justify-center gap-10">
-        {ICONS.map((item, i) => (
+      <motion.div
+        className="flex flex-wrap justify-center gap-8 sm:gap-10"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        {ICONS.map((item, index) => (
           <motion.div
-            key={i}
-            custom={i}
-            initial="hidden"
-            whileInView="visible"
+            key={index}
             variants={cardVariants}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.08 }}
-            className="flex flex-col items-center border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-xl transition-all bg-white"
+            whileHover={{
+              scale: 1.1,
+              boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
+            }}
+            whileTap={{ scale: 0.97 }}
+            className="flex flex-col items-center border border-gray-200 rounded-2xl p-6 sm:p-8 bg-white shadow-md hover:shadow-xl transition-all duration-300 ease-in-out group"
           >
-            <div className="p-4 bg-gray-100 rounded-full mb-3">
-              <item.icon className="w-8 h-8 text-black" />
+            <div className="p-5 bg-gray-100 rounded-full mb-4 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105">
+              <item.icon className="w-10 h-10 text-indigo-600 group-hover:text-indigo-800 transition-colors duration-300" />
             </div>
-            <p className="text-sm text-black font-medium">{item.label}</p>
+            <p className="text-md text-gray-800 font-semibold tracking-wide">
+              {item.label}
+            </p>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
