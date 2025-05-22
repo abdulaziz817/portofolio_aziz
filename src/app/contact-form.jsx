@@ -236,7 +236,7 @@ export function ContactForm() {
               <div className="flex gap-5">
                 <PhoneIcon className="h-6 w-6 text-white" />
                 <Typography variant="h6" color="white" className="mb-2">
-                  +62 878 6059 2111
+                   0878 6059 2111
                 </Typography>
               </div>
               <div className="flex my-2 gap-5">
