@@ -196,7 +196,7 @@ export function ContactForm() {
     }, 1000);
 
     // Handle WhatsApp API link (optional)
-    const phoneNumber = "087782535212";
+    const phoneNumber = "087860592111";
     const messageToSend = encodeURIComponent(
       "Saya ingin mengirimkan PDF kontak."
     );
@@ -242,7 +242,7 @@ export function ContactForm() {
               <div className="flex my-2 gap-5">
                 <EnvelopeIcon className="h-6 w-6 text-white" />
                 <Typography variant="h6" color="white" className="mb-2">
-                  zizzzdul817@gmail.com
+                  zizzzzdul@gmail.com
                 </Typography>
               </div>
               <div className="flex mb-10 gap-5">
@@ -285,7 +285,7 @@ export function ContactForm() {
                     variant="static"
                     label="Email"
                     name="email"
-                    placeholder="zizzzdul817@gmail.com"
+                    placeholder="zizzzzdul@gmail.com"
                     containerProps={{
                       className: "!min-w-full mb-3 md:mb-0",
                     }}

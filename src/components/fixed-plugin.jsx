@@ -29,7 +29,7 @@ export function FixedPlugin() {
 
       {/* Instagram Button */}
       <a
-        href="https://www.instagram.com/zizzzdul_/?next=%2Freels%2F"
+        href="https://www.instagram.com/abdulaziz.nusantara/"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-4 right-4 z-50 group"

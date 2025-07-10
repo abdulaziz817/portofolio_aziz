@@ -11,7 +11,7 @@ import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import { AnimatePresence, motion } from "framer-motion";
 
 const NAV_MENU = [
-  { name: "Instagram", href: "https://www.instagram.com/zizzzdul_/?hl=en" },
+  { name: "Instagram", href: "https://www.instagram.com/abdulaziz.nusantara/" },
   { name: "WhatsApp", href: "https://wa.me/6287860592111" },
 ];
 
