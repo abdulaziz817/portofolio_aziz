@@ -54,7 +54,7 @@ export function KlienPopuler() {
           Klien Populer
         </Typography>
         <Typography variant="h2" className="text-black font-bold text-3xl sm:text-4xl">
-          Dipercaya oleh 100+ Klien
+          Dipercaya oleh 1000+ Klien
         </Typography>
       </motion.div>
 

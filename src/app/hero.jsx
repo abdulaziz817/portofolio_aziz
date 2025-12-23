@@ -91,7 +91,7 @@ function Hero() {
             >
               <Typography variant="h3" className="text-2xl md:text-3xl font-bold text-gray-700">
                 <Typewriter
-                  words={["Desainer Grafis", "Web Developer", "Photography"]}
+                  words={["Desainer Grafis", "Web Developer", "Fotografi"]}
                   loop={false}
                   cursor
                   cursorStyle="_"
@@ -113,7 +113,7 @@ function Hero() {
               className="text-gray-600 max-w-xl mt-4 leading-relaxed text-justify indent-8"
             >
               Saya antusias mempelajari hal-hal baru, terutama di bidang desain grafis, web development, dan fotografi.
-              Berpengalaman lebih dari 5 tahun di dunia desain, saya juga aktif mengembangkan website dan mengeksplorasi visual melalui kamera.
+              Berpengalaman lebih dari 8 tahun di dunia desain, saya juga aktif mengembangkan website dan mengeksplorasi visual melalui kamera.
               Bagi saya, kombinasi desain, kode, dan foto mampu menghadirkan karya yang penuh makna dan warna. 🙂
             </Typography>
           </motion.div>
